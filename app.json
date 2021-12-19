@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "ReactNativeCoordinator",
+    "slug": "ReactNativeCoordinator",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "ReactNativeCoordinator"
+}
