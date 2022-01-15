@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YanuX Resource Management Element</title>
+    <style>
+        .element {
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 8px auto;
+        }
+    </style>
+    <script defer src="lib.js"></script>
+    <script>
+        var yanuxResourceManagementElement;
+        document.addEventListener("DOMContentLoaded", function (e) {
+            yanuxResourceManagementElement = document.getElementById('yrm');        
+
+            yanuxResourceManagementElement.addEventListener(
+                'resource-selected',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'resource-selected', 'eventDetail': e.detail}))
+            );
+            yanuxResourceManagementElement.addEventListener(
+                'create-resource',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'create-resource', 'eventDetail': e.detail}))
+            );
+            yanuxResourceManagementElement.addEventListener(
+                'rename-resource',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'rename-resource', 'eventDetail': e.detail}))
+            );
+            yanuxResourceManagementElement.addEventListener(
+                'share-resource',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'share-resource', 'eventDetail': e.detail}))
+            );
+            yanuxResourceManagementElement.addEventListener(
+                'delete-resource',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'delete-resource', 'eventDetail': e.detail}))
+            );
+            yanuxResourceManagementElement.addEventListener(
+                'unshare-resource',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'unshare-resource', 'eventDetail': e.detail}))
+            );
+        });
+        
+        function update(userId, selectedResourceId, resources = '[]') {
+            yanuxResourceManagementElement.setAttribute('userId', userId);
+            yanuxResourceManagementElement.setAttribute('resources', resources);
+            yanuxResourceManagementElement.setAttribute('selectedResourceId', selectedResourceId);        
+        }
+    </script>
+</head>
+<body>
+    <yanux-resource-management id="yrm" class="element" />
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YanuX Components Distribution Element</title>
+    <style>
+        .element {
+            border: 1px solid black;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 8px auto;
+        }
+    </style>
+    <script defer src="lib.js"></script>
+    <script>
+        var yanuxComponentsDistributionElement;
+        document.addEventListener("DOMContentLoaded", function (e) {
+            yanuxComponentsDistributionElement = document.getElementById('ycd');
+
+            yanuxComponentsDistributionElement.addEventListener(
+                'updated-components-distribution',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'updated-components-distribution', 'eventDetail': e.detail}))
+            );
+            yanuxComponentsDistributionElement.addEventListener(
+                'reset-auto-components-distribution',
+                e => window.ReactNativeWebView.postMessage(JSON.stringify({'eventType': 'reset-auto-components-distribution', 'eventDetail': e.detail}))
+            );
+        });
+        
+        function update(instanceId, componentsDistribution = '{}') {
+            yanuxComponentsDistributionElement.setAttribute('instanceId', instanceId);
+            yanuxComponentsDistributionElement.setAttribute('componentsdistribution', componentsDistribution);
+        }
+    </script>
+</head>
+<body>
+       <yanux-components-distribution id="ycd" class="element" instanceId="5e1f1f35167afc2aaa1515b0" />
+</body>
+</html>
